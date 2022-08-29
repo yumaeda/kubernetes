@@ -65,6 +65,15 @@ kubens -c
 kubectx ${KUBECTL_CONTEXT}
 ```
 
+## Update Deployment
+```zsh
+kubectl apply -f web-deployment.yaml
+```
+
+
+
+
+
 ## Create Deployment (w/ replicas=2)
 ```zsh
 kubectl create deployment ${DEPLOYMENT} --image=${REGION}-docker.pkg.dev/${PROJECT_ID}/${REPOSITORY}/${IMG_NAME}:${IMG_VERSION}
@@ -88,4 +97,8 @@ kubectl get pods
 ### Delete GKE cluster
 ```zsh
 gcloud container clusters delete ${CLUSTER_NAME}
+```
+### Delete Deployment
+```zsh
+kubectl delete deployment $DEPLOYMENT_NAME
 ```

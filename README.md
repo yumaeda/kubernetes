@@ -1,19 +1,20 @@
 # kubernetes
 ## Preparations
-### Install
+### [Setup GCP](https://github.com/yumaeda/gcp/blob/main/README.md)
+### Install packages
 ```sh
 brew install kubectl
 brew install kubectx
 ```
-
-### [Setup GCP](https://github.com/yumaeda/gcp/blob/main/README.md)
 
 ### Enable `container.googleapis.com`
 ```zsh
 gcloud services enable container.googleapis.com
 ```
 
-### Set environment variables
+&nbsp;
+
+## Set environment variables
 ```zsh
 export PROJECT_ID=xxxx
 export IMG_NAME=xxxx
@@ -25,6 +26,8 @@ export REPOSITORY=xxxx
 export DEPLOYMENT=xxxx
 export SERVICE=xxxx
 ```
+
+&nbsp;
 
 ## Create GKE cluster
 - From GKE 1.12.0, [`f1-micro` machine type is no longer supported](https://stackoverflow.com/questions/61357217/gcloud-kubernetes-in-f1-micro-results-in-node-pools-of-f1-micro-machines-are-no).
@@ -40,6 +43,8 @@ gcloud container clusters create \
   --cluster-version latest \
   ${CLUSTER_NAME}
 ```
+
+&nbsp;
 
 ## Get a list of GKE cluster
 ```zsh

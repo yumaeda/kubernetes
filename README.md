@@ -90,3 +90,9 @@ kubectl expose deployment ${DEPLOYMENT} --name=${SERVICE} --type=LoadBalancer --
 ```sh
 kubectl get pods
 ```
+
+## Misc
+### Delete GKE cluster
+```zsh
+gcloud container clusters delete ${CLUSTER_NAME}
+```

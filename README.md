@@ -12,9 +12,7 @@ brew install kubectx
 gcloud services enable container.googleapis.com
 ```
 
-&nbsp;
-
-## Set environment variables
+### Set environment variables
 ```zsh
 export PROJECT_ID=xxxx
 export IMG_NAME=xxxx
@@ -27,9 +25,7 @@ export DEPLOYMENT=xxxx
 export SERVICE=xxxx
 ```
 
-&nbsp;
-
-## Create GKE cluster
+### Create GKE cluster
 - From GKE 1.12.0, [`f1-micro` machine type is no longer supported](https://stackoverflow.com/questions/61357217/gcloud-kubernetes-in-f1-micro-results-in-node-pools-of-f1-micro-machines-are-no).
 
 ```zsh
@@ -44,37 +40,29 @@ gcloud container clusters create \
   ${CLUSTER_NAME}
 ```
 
-&nbsp;
-
-## Get a list of GKE cluster
+### Get a list of GKE cluster
 ```zsh
 gcloud container clusters list
 ```
 
-## Populate `kubeconfig` file
+### Populate `kubeconfig` file (Add a new kubectl context)
 ```zsh
 gcloud container clusters get-credentials ${CLUSTER_NAME} --region ${ZONE} --project ${PROJECT_ID}
 ```
 
-## List Clusters
+### Show list of kubectl contexts
 ```sh
 kubectx
 ```
 
-## Show Current Context's Cluster
-```sh
-kubectx -c
-```
-
-## Show Current Context's Namespace
+### Show namespace for the current kubectl context
 ```sh
 kubens -c
 ```
 
-## Switch
-- To switch your context to one of the clusters displayed by `bubectx`.
+### Switch kubectl context
 ```sh
-kubectx ${CLUSTER_CONTEXT}
+kubectx ${KUBECTL_CONTEXT}
 ```
 
 ## Create Deployment (w/ replicas=2)

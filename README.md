@@ -103,5 +103,9 @@ gcloud container clusters delete ${CLUSTER_NAME}
 ```
 ### Delete Deployment
 ```zsh
-kubectl delete deployment $DEPLOYMENT_NAME
+kubectl delete deployment ${DEPLOYMENT_NAME}
+```
+### Delete Service
+```zsh
+ kubectl delete service ${SERVICE_NAME}
 ```

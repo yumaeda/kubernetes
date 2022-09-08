@@ -51,17 +51,17 @@ gcloud container clusters get-credentials ${CLUSTER_NAME} --region ${ZONE} --pro
 ```
 
 ### Show list of kubectl contexts
-```sh
+```zsh
 kubectx
 ```
 
 ### Show namespace for the current kubectl context
-```sh
+```zsh
 kubens -c
 ```
 
 ### Switch kubectl context
-```sh
+```zsh
 kubectx ${KUBECTL_CONTEXT}
 ```
 
@@ -70,7 +70,10 @@ kubectx ${KUBECTL_CONTEXT}
 kubectl apply -f web-deployment.yaml
 ```
 
-
+## Update Service
+```zsh
+kubectl apply -f web-service.yaml
+```
 
 
 

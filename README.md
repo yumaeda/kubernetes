@@ -65,14 +65,14 @@ kubens -c
 kubectx ${KUBECTL_CONTEXT}
 ```
 
-## Update Deployment
+### Build simplified manifest
 ```zsh
-kubectl apply -f web-deployment.yaml
+kustomize build . > deploy.yaml
 ```
 
-## Update Service
+## Create Deployment & Service
 ```zsh
-kubectl apply -f web-service.yaml
+kubectl apply -f deploy.yaml
 ```
 
 ## Update Ingress
@@ -83,6 +83,11 @@ kubectl apply -f basic-ingress.yaml
 ## Get External IP of the load balancer
 ```zsh
 kubectl get ingress ${INGRESS_NAME}
+```
+
+## Rollout restarted Deployment
+```zsh
+kubectl rollout restart deployment/web
 ```
 
 

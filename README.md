@@ -75,6 +75,15 @@ kubectl apply -f web-deployment.yaml
 kubectl apply -f web-service.yaml
 ```
 
+## Update Ingress
+```zsh
+kubectl apply -f basic-ingress.yaml
+```
+
+## Get External IP of the load balancer
+```zsh
+kubectl get ingress ${INGRESS_NAME}
+```
 
 
 ## Create Deployment (w/ replicas=2)
@@ -107,5 +116,9 @@ kubectl delete deployment ${DEPLOYMENT_NAME}
 ```
 ### Delete Service
 ```zsh
- kubectl delete service ${SERVICE_NAME}
+kubectl delete service ${SERVICE_NAME}
+```
+### Delete Ingress
+```zsh
+kubectl delete ingress ${INGRESS_NAME}
 ```

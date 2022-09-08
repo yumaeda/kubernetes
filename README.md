@@ -127,3 +127,6 @@ kubectl delete service ${SERVICE_NAME}
 ```zsh
 kubectl delete ingress ${INGRESS_NAME}
 ```
+
+## Reference
+- https://qiita.com/Esfahan/items/f7d13d7e80848e9b6963

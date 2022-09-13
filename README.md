@@ -82,10 +82,6 @@ kubectl apply -f basic-ingress.yaml
 ```zsh
 kubectl get ingress ${INGRESS_NAME}
 ```
-### Rollout restarted Deployment
-```zsh
-kubectl rollout restart deployment/web
-```
 
 &nbsp;
 
@@ -106,6 +102,33 @@ kubectl delete deployment web
 ```zsh
 gcloud container clusters delete ${CLUSTER_NAME}
 ```
+
+&nbsp;
+
+## Misc
+### Port-forward service to localhost
+```zsh
+kubectl port-forward svc/web 8080:8080
+```
+- Access http://localhost:8080/ to make sure that port-forwarding works.
+### Execute command within pods
+```zsh
+kubectl exec --stdin --tty ${POD_NAME} -- /bin/sh
+```
+### Show logs for the pod
+```zsh
+kubectl logs ${POD_NAME}
+```
+### Delete the current pod
+```zsh
+kubectl delete pod ${POD_NAME}
+```
+- New pod with different name is automatically created.
+### Rollout restarted Deployment
+```zsh
+kubectl rollout restart deployment/web
+```
+- Old pod is replaced by new pod.
 
 &nbsp;
 

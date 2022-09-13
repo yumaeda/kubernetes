@@ -3,8 +3,10 @@
 ### [Setup GCP](https://github.com/yumaeda/gcp/blob/main/README.md)
 ### Install packages
 ```sh
-brew install kubectl
-brew install kubectx
+brew install \
+  kubectl \
+  kubectx \
+  kustomize
 ```
 
 ### Enable `container.googleapis.com`

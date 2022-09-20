@@ -22,7 +22,6 @@ export PROJECT_ID=xxxx
 export REGION=us-central1
 export ZONE=us-central1-a
 export CLUSTER_NAME="prod-$REGION-yumaeda"
-export SERVICE=xxxx
 ```
 ### Execute below command
 - From GKE 1.12.0, [`f1-micro` machine type is no longer supported](https://stackoverflow.com/questions/61357217/gcloud-kubernetes-in-f1-micro-results-in-node-pools-of-f1-micro-machines-are-no).

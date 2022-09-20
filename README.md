@@ -132,4 +132,4 @@ kubectl rollout restart deployment/web
 &nbsp;
 
 ## Reference
-- https://qiita.com/Esfahan/items/f7d13d7e80848e9b6963
+- https://github.com/socialwifi/docker-nginx-gcs-proxy

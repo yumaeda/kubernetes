@@ -9,8 +9,7 @@ spec:
     spec:
       containers:
       - name: web
-        image: us-docker.pkg.dev/google-samples/containers/gke/hello-app:1.0
-        imagePullPolicy: IfNotPresent
+        image: nginx:alpine
         ports:
-        - containerPort: 8080
-          protocol: TCP
+        - name: http-port
+          containerPort: 80

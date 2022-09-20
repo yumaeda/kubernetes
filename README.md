@@ -79,7 +79,7 @@ kubectl apply -f basic-ingress.yaml
 ```
 ### Get External IP of the load balancer
 ```zsh
-kubectl get ingress ${INGRESS_NAME}
+kubectl get ingress basic-ingress
 ```
 
 &nbsp;

@@ -131,5 +131,17 @@ kubectl rollout restart deployment/web
 
 &nbsp;
 
+## Docker
+### Build Docker image
+```zsh
+docker build --no-cache -t yumaeda/nginx-gcs-proxy .
+```
+### Run Docker container
+```zsh
+docker run --rm -d -p 8080:8080 yumaeda/nginx-gcs-proxy
+```
+
+&nbsp;
+
 ## Reference
 - https://github.com/socialwifi/docker-nginx-gcs-proxy

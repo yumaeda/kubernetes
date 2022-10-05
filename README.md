@@ -19,8 +19,10 @@ gcloud services enable container.googleapis.com
 ### Set environment variables
 ```zsh
 export PROJECT_ID=xxxx
-export REGION=us-central1
-export ZONE=us-central1-a
+```
+```zsh
+export REGION=us-central1 \
+export ZONE=us-central1-a \
 export CLUSTER_NAME="prod-$REGION-yumaeda"
 ```
 ### Execute below command

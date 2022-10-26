@@ -35,8 +35,6 @@ gcloud container clusters create \
   --machine-type g1-small \
   --num-nodes 3 \
   --disk-size 10 \
-  --workload-pool=${PROJECT_ID}.svc.id.goog \
-  --addons ConfigConnector \
   --zone ${ZONE} \
   --cluster-version latest \
   ${CLUSTER_NAME}
@@ -65,9 +63,9 @@ kubectx ${KUBECTL_CONTEXT}
 &nbsp;
 
 ## Deploy
-### Create a reserved external IP address
+### Move to the manifests directory
 ```zsh
-kubectl apply -f compute-address.yaml
+cd manifests
 ```
 ### Build simplified manifest
 ```zsh
@@ -81,10 +79,6 @@ kubectl apply -f deploy.yaml
 ```zsh
 kubectl get pods
 ```
-### Create managed certificate
-```zsh
-kubectl apply -f managed-cert.yaml 
-```
 ### Create Ingress
 ```zsh
 kubectl apply -f basic-ingress.yaml
@@ -93,33 +87,14 @@ kubectl apply -f basic-ingress.yaml
 ```zsh
 kubectl get ingress basic-ingress
 ```
-### Configure DNS records
-- Configure ramen-mania.net
-- Configure www.ramen-mania.net
 ### Check the status of the certificate
 ```zsh
 gcloud beta compute ssl-certificates list
-kubectl describe managedcertificate managed-cert
 ```
 
 &nbsp;
 
 ## Delete
-### Delete Google-managed certificate
-```zsh
-kubectl delete -f managed-cert.yaml
-```
-### Remove DNS records
-- Remove record for ramen-mania.net
-- Remove record for www.ramen-mania.net
-### Remove annotation from the Ingress
-```zsh
-kubectl annotate ingress basic-ingress networking.gke.io/managed-certificates-
-```
-### Delete reserved IP address
-```zsh
-kubectl delete -f compute-address.yaml
-```
 ### Delete Ingress
 ```zsh
 kubectl delete ingress basic-ingress
@@ -140,11 +115,6 @@ gcloud container clusters delete ${CLUSTER_NAME}
 &nbsp;
 
 ## Misc
-### Enable ConfigConnector for the cluster
-```zsh
-gcloud container clusters update ${CLUSTER_NAME} --workload-pool=${PROJECT_ID}.svc.id.goog
-gcloud container clusters update ${CLUSTER_NAME} --update-addons ConfigConnector=ENABLED  
-```
 ### Port-forward service to localhost
 ```zsh
 kubectl port-forward svc/web 8080:8080
@@ -172,4 +142,5 @@ kubectl rollout restart deployment/web
 &nbsp;
 
 ## Reference
+- https://cloud.google.com/load-balancing/docs/ssl-certificates/troubleshooting?&_ga=2.28635196.-1210616006.1659620185#certificate-managed-status
 - https://cloud.google.com/kubernetes-engine/docs/how-to/managed-certs

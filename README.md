@@ -99,13 +99,13 @@ gcloud beta compute ssl-certificates list
 &nbsp;
 
 ## Delete
-### Delete Google-managed certificate
-```zsh
-kubectl delete -f web-cert.yaml
-```
 ### Delete Ingress
 ```zsh
 kubectl delete ingress basic-ingress
+```
+### Delete Google-managed certificate
+```zsh
+kubectl delete -f web-cert.yaml
 ```
 ### Delete Service
 ```zsh

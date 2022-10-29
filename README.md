@@ -79,13 +79,17 @@ kubectl apply -f deploy.yaml
 ```zsh
 kubectl get pods
 ```
+### Create managed certificate
+```zsh
+kubectl apply -f web-cert.yaml
+```
 ### Create Ingress
 ```zsh
 kubectl apply -f basic-ingress.yaml
 ```
 ### Get External IP of the load balancer
 ```zsh
-kubectl get ingress basic-ingress
+kubectl describe ingress basic-ingress 
 ```
 ### Check the status of the certificate
 ```zsh
@@ -95,6 +99,10 @@ gcloud beta compute ssl-certificates list
 &nbsp;
 
 ## Delete
+### Delete Google-managed certificate
+```zsh
+kubectl delete -f web-cert.yaml
+```
 ### Delete Ingress
 ```zsh
 kubectl delete ingress basic-ingress
@@ -144,3 +152,4 @@ kubectl rollout restart deployment/web
 ## Reference
 - https://cloud.google.com/load-balancing/docs/ssl-certificates/troubleshooting?&_ga=2.28635196.-1210616006.1659620185#certificate-managed-status
 - https://cloud.google.com/kubernetes-engine/docs/how-to/managed-certs
+- https://qiita.com/tontoko/items/33faead6bb14370ecb17

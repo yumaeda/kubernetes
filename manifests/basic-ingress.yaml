@@ -4,12 +4,14 @@ metadata:
   name: basic-ingress
   namespace: default
   annotations:
-    kubernetes.io/ingress.global-static-ip-name: website-lb-ip
-    networking.gke.io/managed-certificates: website-cert
+    kubernetes.io/ingress.global-static-ip-name: "website-lb-ip"
+    networking.gke.io/managed-certificates: "web-cert"
+    kubernetes.io/ingress.allow-http: "false"
     kubernetes.io/ingress.class: "gce"
 spec:
   rules:
-    - http:
+    - host: "ramen-mania.net"
+      http:
         paths:
           - path: /
             pathType: Prefix

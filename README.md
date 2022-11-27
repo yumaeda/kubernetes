@@ -145,6 +145,10 @@ kubectl delete pod ${POD_NAME}
 kubectl rollout restart deployment/web
 ```
 - Old pod is replaced by new pod.
+### Delete all pods
+```zsh
+kubectl delete --all pods --namespace=default
+```
 
 &nbsp;
 

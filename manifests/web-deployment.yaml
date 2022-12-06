@@ -9,7 +9,7 @@ spec:
     spec:
       containers:
       - name: web
-        image: "us-central1-docker.pkg.dev/hello-world-352201/nginx-gcs-proxy/nginx-gcs-proxy:1.0.4"
+        image: "us-central1-docker.pkg.dev/hello-world-352201/nginx-gcs-proxy/nginx-gcs-proxy:1.0.8"
         ports:
         - name: http-port
           containerPort: 80

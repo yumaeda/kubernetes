@@ -94,6 +94,14 @@ kubectl describe ingress basic-ingress
 ```zsh
 gcloud beta compute ssl-certificates list
 ```
+### Create CronJob
+```zsh
+kubectl apply -f cronjob.yaml
+```
+### Check a CronJob's configuration
+```zsh
+kubectl describe cronjob terminated-pod-cleaner
+```
 
 &nbsp;
 
@@ -118,6 +126,10 @@ kubectl delete deployment web
 ```zsh
 gcloud container clusters delete ${CLUSTER_NAME}
 ```
+### Delete a CronJob
+```zsh
+kubectl delete cronjob terminated-pod-cleaner
+``
 
 &nbsp;
 

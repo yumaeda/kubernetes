@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: terminated-pod-cleaner
+  namespace: default
+spec:
+  schedule: "0 15 * * 0"
+  startingDeadlineSeconds: 100
+  concurrencyPolicy: Replace
+  suspend: false
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: terminated-pod-cleaner
+            image: bitnami/kubectl:1.26.1
+            command:
+            - /bin/sh
+            - -c
+            - kubectl get pods | grep -i -e Completed | awk '{print $1}' | xargs -r kubectl delete pod
+          restartPolicy: Never

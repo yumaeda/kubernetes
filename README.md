@@ -129,7 +129,7 @@ gcloud container clusters delete ${CLUSTER_NAME}
 ### Delete a CronJob
 ```zsh
 kubectl delete cronjob terminated-pod-cleaner
-``
+```
 
 &nbsp;
 

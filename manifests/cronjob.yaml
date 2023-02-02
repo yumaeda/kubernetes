@@ -12,6 +12,7 @@ spec:
     spec:
       template:
         spec:
+          serviceAccountName: pod-serviceaccount
           containers:
           - name: terminated-pod-cleaner
             image: bitnami/kubectl:1.26.1

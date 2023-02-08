@@ -102,6 +102,14 @@ kubectl apply -f cronjob.yaml
 ```zsh
 kubectl describe cronjob terminated-pod-cleaner
 ```
+### Create a ServiceAccount
+```zsh
+kubectl apply -f serviceaccount.yaml
+```
+### Get a list of ServiceAccounts
+```zsh
+kubectl get serviceaccounts 
+```
 
 &nbsp;
 
@@ -129,6 +137,10 @@ gcloud container clusters delete ${CLUSTER_NAME}
 ### Delete a CronJob
 ```zsh
 kubectl delete cronjob terminated-pod-cleaner
+```
+### Delete the ServiceAccount
+```zsh
+kubectl delete serviceaccount/pod-serviceaccount
 ```
 
 &nbsp;

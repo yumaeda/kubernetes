@@ -66,6 +66,14 @@ kubectx ${KUBECTL_CONTEXT}
 ```zsh
 cd manifests
 ```
+### Create Namespace
+```zsh
+kubectl apply -f namespace.yaml
+```
+### Get a list of Namespaces
+```zsh
+kubectl get namespaces
+```
 ### Build simplified manifest
 ```zsh
 kustomize build . > deploy.yaml
@@ -142,6 +150,10 @@ kubectl delete cronjob terminated-pod-cleaner
 ```zsh
 kubectl delete serviceaccount/pod-serviceaccount
 ```
+### Delete the Namespace
+```zsh
+kubectl delete -f namespace.yaml
+```
 
 &nbsp;
 
@@ -177,6 +189,7 @@ kubectl delete --all pods --namespace=default
 &nbsp;
 
 ## Reference
+- https://cloud.google.com/blog/products/containers-kubernetes/kubernetes-best-practices-organizing-with-namespaces
 - https://cloud.google.com/load-balancing/docs/ssl-certificates/troubleshooting?&_ga=2.28635196.-1210616006.1659620185#certificate-managed-status
 - https://cloud.google.com/kubernetes-engine/docs/how-to/managed-certs
 - https://qiita.com/tontoko/items/33faead6bb14370ecb17

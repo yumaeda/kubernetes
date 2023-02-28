@@ -74,6 +74,14 @@ kubectl apply -f namespace.yaml
 ```zsh
 kubectl get namespaces
 ```
+### Create LimitRange
+```zsh
+kubectl apply -f limitrange.yaml --namespace=ramen-mania
+```
+### Get the LimitRange for the ramen-mania Namespace
+```zsh
+kubectl describe limitranges --namespace=ramen-mania
+```
 ### Build simplified manifest
 ```zsh
 kustomize build . > deploy.yaml
@@ -150,6 +158,10 @@ kubectl delete cronjob terminated-pod-cleaner
 ```zsh
 kubectl delete serviceaccount/pod-serviceaccount
 ```
+### Delete the LimitRange for the ramen-mania Namespace
+```zsh
+kubectl delete -f limitrange.yaml --namespace=ramen-mania
+```
 ### Delete the Namespace
 ```zsh
 kubectl delete -f namespace.yaml
@@ -190,6 +202,7 @@ kubectl delete --all pods --namespace=default
 
 ## Reference
 - https://cloud.google.com/blog/products/containers-kubernetes/kubernetes-best-practices-organizing-with-namespaces
+- https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/memory-default-namespace/
 - https://cloud.google.com/load-balancing/docs/ssl-certificates/troubleshooting?&_ga=2.28635196.-1210616006.1659620185#certificate-managed-status
 - https://cloud.google.com/kubernetes-engine/docs/how-to/managed-certs
 - https://qiita.com/tontoko/items/33faead6bb14370ecb17

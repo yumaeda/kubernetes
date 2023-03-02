@@ -1,6 +1,7 @@
 apiVersion: networking.gke.io/v1
 kind: ManagedCertificate
 metadata:
+  namespace: ramen-mania
   name: web-cert
 spec:
   domains:

@@ -92,7 +92,7 @@ kubectl apply -f deploy.yaml
 ```
 ### List Pods
 ```zsh
-kubectl get pods
+kubectl get pods --namespace=ramen-mania
 ```
 ### Create managed certificate
 ```zsh
@@ -104,7 +104,7 @@ kubectl apply -f basic-ingress.yaml
 ```
 ### Get External IP of the load balancer
 ```zsh
-kubectl describe ingress basic-ingress 
+kubectl describe ingress basic-ingress --namespace=ramen-mania
 ```
 ### Check the status of the certificate
 ```zsh
@@ -130,9 +130,13 @@ kubectl get serviceaccounts
 &nbsp;
 
 ## Delete
+### Move to the manifests directory
+```zsh
+cd manifests
+```
 ### Delete Ingress
 ```zsh
-kubectl delete ingress basic-ingress
+kubectl delete -f basic-ingress.yaml
 ```
 ### Delete Google-managed certificate
 ```zsh
@@ -140,11 +144,11 @@ kubectl delete -f web-cert.yaml
 ```
 ### Delete Service
 ```zsh
-kubectl delete service web
+kubectl delete service web --namespace=ramen-mania
 ```
 ### Delete Deployment
 ```zsh
-kubectl delete deployment web
+kubectl delete deployment web --namespace=ramen-mania
 ```
 ### Delete GKE cluster
 ```zsh
@@ -196,6 +200,7 @@ kubectl rollout restart deployment/web
 ### Delete all pods
 ```zsh
 kubectl delete --all pods --namespace=default
+kubectl delete --all pods --namespace=ramen-mainia
 ```
 
 &nbsp;

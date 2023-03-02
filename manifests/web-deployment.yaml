@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: web
-  namespace: default
+  namespace: ramen-mania
 spec:
   replicas: 1
   template:

@@ -2,7 +2,7 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: terminated-pod-cleaner
-  namespace: default
+  namespace: ramen-mania
 spec:
   schedule: "0 15 * * 0"
   startingDeadlineSeconds: 100

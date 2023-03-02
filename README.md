@@ -110,21 +110,21 @@ kubectl describe ingress basic-ingress --namespace=ramen-mania
 ```zsh
 gcloud beta compute ssl-certificates list
 ```
-### Create CronJob
-```zsh
-kubectl apply -f cronjob.yaml
-```
-### Check a CronJob's configuration
-```zsh
-kubectl describe cronjob terminated-pod-cleaner
-```
 ### Create a ServiceAccount
 ```zsh
 kubectl apply -f serviceaccount.yaml
 ```
 ### Get a list of ServiceAccounts
 ```zsh
-kubectl get serviceaccounts 
+kubectl get serviceaccounts --namespace=ramen-mania
+```
+### Create CronJob
+```zsh
+kubectl apply -f cronjob.yaml
+```
+### Check a CronJob's configuration
+```zsh
+kubectl describe cronjob terminated-pod-cleaner --namespace=ramen-mania
 ```
 
 &nbsp;
@@ -150,17 +150,13 @@ kubectl delete service web --namespace=ramen-mania
 ```zsh
 kubectl delete deployment web --namespace=ramen-mania
 ```
-### Delete GKE cluster
-```zsh
-gcloud container clusters delete ${CLUSTER_NAME}
-```
 ### Delete a CronJob
 ```zsh
-kubectl delete cronjob terminated-pod-cleaner
+kubectl delete -f cronjob.yaml
 ```
 ### Delete the ServiceAccount
 ```zsh
-kubectl delete serviceaccount/pod-serviceaccount
+kubectl delete -f serviceaccount.yaml
 ```
 ### Delete the LimitRange for the ramen-mania Namespace
 ```zsh
@@ -169,6 +165,10 @@ kubectl delete -f limitrange.yaml --namespace=ramen-mania
 ### Delete the Namespace
 ```zsh
 kubectl delete -f namespace.yaml
+```
+### Delete GKE cluster
+```zsh
+gcloud container clusters delete ${CLUSTER_NAME}
 ```
 
 &nbsp;

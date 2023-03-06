@@ -215,21 +215,45 @@ helm repo update
 ### Install
 ```zsh
 kubectl create namespace istio-system
+```
+```zsh
 helm install istio-base istio/base -n istio-system
+```
+```zsh
 helm install istiod istio/istiod -n istio-system --wait
+```
+```zsh
 kubectl create namespace istio-ingress
+```
+```zsh
 kubectl label namespace istio-ingress istio-injection=enabled
+```
+```zsh
 helm install istio-ingress istio/gateway -n istio-ingress --wait
+```
+```zsh
 helm list --namespace=istio-system
+```
+```zsh
 kubectl get pods --namespace=istio-system
 ```
 ### Uinstall
 ```zsh
 helm uninstall istio-ingress --namespace=istio-system
+```
+```zsh
 helm uninstall istiod --namespace=istio-system
+```
+```zsh
 helm uninstall istio-base --namespace=istio-system
+```
+```zsh
 kubectl delete namespace istio-system
+```
+```zsh
 kubectl delete namespace istio-ingress
+```
+```zsh
 kubectl get crd -oname | grep --color=never 'istio.io' | xargs kubectl delete
 ```
 

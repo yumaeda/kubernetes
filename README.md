@@ -4,6 +4,7 @@
 ### Install packages
 ```sh
 brew install \
+  helm \
   kubectl \
   kubectx \
   kustomize

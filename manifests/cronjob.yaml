@@ -2,7 +2,7 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: terminated-pod-cleaner
-  namespace: ramen-mania
+  namespace: default
 spec:
   schedule: "0 15 * * 0"
   startingDeadlineSeconds: 100
@@ -19,5 +19,5 @@ spec:
             command:
             - /bin/sh
             - -c
-            - kubectl get pods | grep -i -e Completed | awk '{print $1}' | xargs -r kubectl delete pod
+            - kubectl get pods --namespace=ramen-mania | grep -i -e Completed | awk '{print $1}' | xargs -r kubectl delete pod --namespace=ramen-mania
           restartPolicy: Never

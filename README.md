@@ -206,7 +206,37 @@ kubectl delete --all pods --namespace=ramen-mania
 
 &nbsp;
 
+## Istio
+### Preparation
+```zsh
+helm repo add istio https://istio-release.storage.googleapis.com/charts
+helm repo update
+```
+### Install
+```zsh
+kubectl create namespace istio-system
+helm install istio-base istio/base -n istio-system
+helm install istiod istio/istiod -n istio-system --wait
+kubectl create namespace istio-ingress
+kubectl label namespace istio-ingress istio-injection=enabled
+helm install istio-ingress istio/gateway -n istio-ingress --wait
+helm list --namespace=istio-system
+kubectl get pods --namespace=istio-system
+```
+### Uinstall
+```zsh
+helm uninstall istio-ingress --namespace=istio-system
+helm uninstall istiod --namespace=istio-system
+helm uninstall istio-base --namespace=istio-system
+kubectl delete namespace istio-system
+kubectl delete namespace istio-ingress
+kubectl get crd -oname | grep --color=never 'istio.io' | xargs kubectl delete
+```
+
+&nbsp;
+
 ## Reference
+- https://istio.io/latest/docs/setup/install/helm/
 - https://cloud.google.com/load-balancing/docs/ssl-certificates/troubleshooting?&_ga=2.28635196.-1210616006.1659620185#certificate-managed-status
 - https://cloud.google.com/kubernetes-engine/docs/how-to/managed-certs
 - https://qiita.com/tontoko/items/33faead6bb14370ecb17

@@ -200,7 +200,7 @@ kubectl rollout restart deployment/web
 ### Delete all pods
 ```zsh
 kubectl delete --all pods --namespace=default
-kubectl delete --all pods --namespace=ramen-mainia
+kubectl delete --all pods --namespace=ramen-mania
 ```
 
 &nbsp;

@@ -260,6 +260,7 @@ kubectl get crd -oname | grep --color=never 'istio.io' | xargs kubectl delete
 &nbsp;
 
 ## Reference
+- https://istio.io/v1.5/docs/setup/install/istioctl/
 - https://istio.io/latest/docs/setup/install/helm/
 - https://cloud.google.com/load-balancing/docs/ssl-certificates/troubleshooting?&_ga=2.28635196.-1210616006.1659620185#certificate-managed-status
 - https://cloud.google.com/kubernetes-engine/docs/how-to/managed-certs

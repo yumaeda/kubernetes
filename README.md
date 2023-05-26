@@ -207,44 +207,37 @@ kubectl delete --all pods --namespace=ramen-mania
 &nbsp;
 
 ## Datadog
-### Preparation
-```zsh
-helm repo add datadog https://helm.datadoghq.com
-helm repo update
-```
 ### Set environment variable for API Key
 ```zsh
 export DATADOG_API_KEY=xxxx
 ```
-### Set environment variable for App Key
+### Install Datadog Agent
 ```zsh
-export DATADOG_APP_KEY=xxxx
+helm repo add datadog https://helm.datadoghq.com
+helm repo update
+helm install datadog-agent -f datadog-values.yaml -n ramen-mania --set datadog.site='datadoghq.com' --set datadog.apiKey=${DATADOG_API_KEY} datadog/datadog
 ```
-### Install
-- `datadog-operator-lock` Config Map is also created.
+### Warning
 ```zsh
-helm install datadog-operator datadog/datadog-operator -n ramen-mania
-```
-### Create a Kubernetes Secret
-```zsh
-kubectl create secret generic datadog-secret --from-literal api-key=${DATADOG_API_KEY} --from-literal app-key=${DATADOG_APP_KEY} -n ramen-mania
-```
-### Deploy the Datadog Agent
-```zsh
-kubectl apply -f datadog-agent.yaml
-```
-### Remove Datadog Agent
-```zsh
-kubectl delete -f datadog-agent.yaml --namespace=ramen-mania
-```
-### Delete Secret
-```zsh
-kubectl delete secret datadog-secret -n ramen-mania
-kubectl delete configmap datadog-operator-lock -n ramen-mania
+###################################################################################
+####   WARNING: Cluster-Agent should be deployed in high availability mode     ####
+###################################################################################
+
+The Cluster-Agent should be in high availability mode because the following features
+are enabled:
+* Admission Controller
+
+To run in high availability mode, our recommendation is to update the chart
+configuration with:
+* set clusterAgent.replicas value to 2 replicas .
+* set clusterAgent.createPodDisruptionBudget to true.
 ```
 ### Uinstall Datadog Operator
 ```zsh
 helm uninstall datadog-operator -n ramen-mania
+kubectl delete configmap datadog-agent-leader-election -n ramen-mania
+kubectl delete configmap datadog-agenttoken -n ramen-mania
+kubectl delete configmap datadog-cluster-id -n ramen-mania
 ```
 
 &nbsp;

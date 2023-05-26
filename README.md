@@ -206,6 +206,49 @@ kubectl delete --all pods --namespace=ramen-mania
 
 &nbsp;
 
+## Datadog
+### Preparation
+```zsh
+helm repo add datadog https://helm.datadoghq.com
+helm repo update
+```
+### Set environment variable for API Key
+```zsh
+export DATADOG_API_KEY=xxxx
+```
+### Set environment variable for App Key
+```zsh
+export DATADOG_APP_KEY=xxxx
+```
+### Install
+- `datadog-operator-lock` Config Map is also created.
+```zsh
+helm install datadog-operator datadog/datadog-operator -n ramen-mania
+```
+### Create a Kubernetes Secret
+```zsh
+kubectl create secret generic datadog-secret --from-literal api-key=${DATADOG_API_KEY} --from-literal app-key=${DATADOG_APP_KEY} -n ramen-mania
+```
+### Deploy the Datadog Agent
+```zsh
+kubectl apply -f datadog-agent.yaml
+```
+### Remove Datadog Agent
+```zsh
+kubectl delete -f datadog-agent.yaml --namespace=ramen-mania
+```
+### Delete Secret
+```zsh
+kubectl delete secret datadog-secret -n ramen-mania
+kubectl delete configmap datadog-operator-lock -n ramen-mania
+```
+### Uinstall Datadog Operator
+```zsh
+helm uninstall datadog-operator -n ramen-mania
+```
+
+&nbsp;
+
 ## Istio
 ### Preparation
 ```zsh
@@ -260,6 +303,7 @@ kubectl get crd -oname | grep --color=never 'istio.io' | xargs kubectl delete
 &nbsp;
 
 ## Reference
+- https://docs.datadoghq.com/containers/kubernetes/installation/?tab=operator
 - https://istio.io/latest/docs/setup/install/helm/
 - https://cloud.google.com/load-balancing/docs/ssl-certificates/troubleshooting?&_ga=2.28635196.-1210616006.1659620185#certificate-managed-status
 - https://cloud.google.com/kubernetes-engine/docs/how-to/managed-certs

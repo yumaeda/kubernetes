@@ -188,6 +188,10 @@ kubectl exec --stdin --tty ${POD_NAME} -- /bin/sh
 ```zsh
 kubectl logs ${POD_NAME}
 ```
+### See current resource usage
+```zsh
+kubectl top pod -n ramen-mania
+```
 ### Delete the current pod
 ```zsh
 kubectl delete pod ${POD_NAME}

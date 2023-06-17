@@ -179,7 +179,7 @@ gcloud container clusters delete ${CLUSTER_NAME}
 ```zsh
 gcloud container node-pools create ramen-mania-pool \
   --cluster ${CLUSTER_NAME} --zone ${ZONE} \
-  --machine-type=e2-small --num-nodes=2 \
+  --machine-type=e2-small --num-nodes=2 --max-nodes=3 \
   --disk-size=10 --preemptible
 ```
 ```zsh
@@ -251,7 +251,7 @@ configuration with:
 ```
 ### Uinstall Datadog Operator
 ```zsh
-helm uninstall datadog-operator -n ramen-mania
+helm uninstall datadog-agent -n ramen-mania
 kubectl delete configmap datadog-agent-leader-election -n ramen-mania
 kubectl delete configmap datadog-agenttoken -n ramen-mania
 kubectl delete configmap datadog-cluster-id -n ramen-mania

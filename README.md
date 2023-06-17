@@ -179,7 +179,7 @@ gcloud container clusters delete ${CLUSTER_NAME}
 ```zsh
 gcloud container node-pools create ramen-mania-pool \
   --cluster ${CLUSTER_NAME} --zone ${ZONE} \
-  --machine-type=e2-micro --num-nodes=1 --max-nodes=3
+  --machine-type=e2-small --num-nodes=2 \
   --disk-size=10 --preemptible
 ```
 ```zsh

@@ -175,6 +175,19 @@ gcloud container clusters delete ${CLUSTER_NAME}
 &nbsp;
 
 ## Misc
+### Reduce the number of nodes in the k8s cluster
+```zsh
+gcloud container node-pools create ramen-mania-pool \
+  --cluster ${CLUSTER_NAME} --zone ${ZONE} \
+  --machine-type=e2-micro --num-nodes=1 --max-nodes=3
+  --disk-size=10 --preemptible
+```
+```zsh
+gcloud container node-pools delete default-pool --cluster ${CLUSTER_NAME} --zone ${ZONE}
+```
+```zsh
+kubectl get pod --all-namespaces
+```
 ### Port-forward service to localhost
 ```zsh
 kubectl port-forward svc/web 8080:8080

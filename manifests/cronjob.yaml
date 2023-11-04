@@ -19,5 +19,5 @@ spec:
             command:
             - /bin/sh
             - -c
-            - kubectl get pods --namespace=sakaba-link | grep -i -e Completed | awk '{print $1}' | xargs -r kubectl delete pod --namespace=sakaba-link
+            - kubectl get pods --namespace=sakabas | grep -i -e Completed | awk '{print $1}' | xargs -r kubectl delete pod --namespace=sakabas
           restartPolicy: Never

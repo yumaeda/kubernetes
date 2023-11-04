@@ -79,9 +79,9 @@ kubectl get namespaces
 ```zsh
 kubectl apply -f limitrange.yaml
 ```
-### Get the LimitRange for the sakaba-link Namespace
+### Get the LimitRange for the sakabas Namespace
 ```zsh
-kubectl describe limitranges --namespace=sakaba-link
+kubectl describe limitranges --namespace=sakabas
 ```
 ### Build simplified manifest
 ```zsh
@@ -93,7 +93,7 @@ kubectl apply -f deploy.yaml
 ```
 ### List Pods
 ```zsh
-kubectl get pods --namespace=sakaba-link
+kubectl get pods --namespace=sakabas
 ```
 ### Create managed certificate
 ```zsh
@@ -105,7 +105,7 @@ kubectl apply -f basic-ingress.yaml
 ```
 ### Get External IP of the load balancer
 ```zsh
-kubectl describe ingress basic-ingress --namespace=sakaba-link
+kubectl describe ingress basic-ingress --namespace=sakabas
 ```
 ### Check the status of the certificate
 ```zsh
@@ -145,11 +145,11 @@ kubectl delete -f web-cert.yaml
 ```
 ### Delete Service
 ```zsh
-kubectl delete service web --namespace=ramen-mania
+kubectl delete service web --namespace=sakabas
 ```
 ### Delete Deployment
 ```zsh
-kubectl delete deployment web --namespace=ramen-mania
+kubectl delete deployment web --namespace=sakabas
 ```
 ### Delete a CronJob
 ```zsh
@@ -161,7 +161,7 @@ kubectl delete -f serviceaccount.yaml
 ```
 ### Delete the LimitRange for the ramen-mania Namespace
 ```zsh
-kubectl delete -f limitrange.yaml --namespace=ramen-mania
+kubectl delete -f limitrange.yaml
 ```
 ### Delete the Namespace
 ```zsh
@@ -203,7 +203,7 @@ kubectl logs ${POD_NAME}
 ```
 ### See current resource usage
 ```zsh
-kubectl top pod -n ramen-mania
+kubectl top pod -n sakabas
 ```
 ### Delete the current pod
 ```zsh
@@ -218,7 +218,7 @@ kubectl rollout restart deployment/web
 ### Delete all pods
 ```zsh
 kubectl delete --all pods --namespace=default
-kubectl delete --all pods --namespace=ramen-mania
+kubectl delete --all pods --namespace=sakabas
 ```
 
 &nbsp;

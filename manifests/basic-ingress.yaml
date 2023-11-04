@@ -2,13 +2,13 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: basic-ingress
-  namespace: sakaba-link
+  namespace: sakabas
   annotations:
     kubernetes.io/ingress.global-static-ip-name: "website-lb-ip"
     networking.gke.io/managed-certificates: "web-cert"
 spec:
   rules:
-    - host: "sakaba.link"
+    - host: "sakabas.com"
       http:
         paths:
           - path: /

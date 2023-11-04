@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: web
-  namespace: ramen-mania
+  namespace: sakaba-link
 spec:
   type: NodePort
   ports:

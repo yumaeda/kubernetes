@@ -2,14 +2,13 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: basic-ingress
-  namespace: ramen-mania
+  namespace: sakaba-link
   annotations:
     kubernetes.io/ingress.global-static-ip-name: "website-lb-ip"
     networking.gke.io/managed-certificates: "web-cert"
-    kubernetes.io/ingress.class: "gce"
 spec:
   rules:
-    - host: "ramen-mania.net"
+    - host: "sakaba.link"
       http:
         paths:
           - path: /

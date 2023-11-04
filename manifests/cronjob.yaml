@@ -19,5 +19,5 @@ spec:
             command:
             - /bin/sh
             - -c
-            - kubectl get pods --namespace=ramen-mania | grep -i -e Completed | awk '{print $1}' | xargs -r kubectl delete pod --namespace=ramen-mania
+            - kubectl get pods --namespace=sakaba-link | grep -i -e Completed | awk '{print $1}' | xargs -r kubectl delete pod --namespace=sakaba-link
           restartPolicy: Never

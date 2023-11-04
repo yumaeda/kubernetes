@@ -1,8 +1,8 @@
 apiVersion: networking.gke.io/v1
 kind: ManagedCertificate
 metadata:
-  namespace: ramen-mania
+  namespace: sakaba-link
   name: web-cert
 spec:
   domains:
-    - ramen-mania.net
+    - sakaba.link

@@ -77,11 +77,11 @@ kubectl get namespaces
 ```
 ### Create LimitRange
 ```zsh
-kubectl apply -f limitrange.yaml --namespace=ramen-mania
+kubectl apply -f limitrange.yaml
 ```
-### Get the LimitRange for the ramen-mania Namespace
+### Get the LimitRange for the sakaba-link Namespace
 ```zsh
-kubectl describe limitranges --namespace=ramen-mania
+kubectl describe limitranges --namespace=sakaba-link
 ```
 ### Build simplified manifest
 ```zsh
@@ -93,7 +93,7 @@ kubectl apply -f deploy.yaml
 ```
 ### List Pods
 ```zsh
-kubectl get pods --namespace=ramen-mania
+kubectl get pods --namespace=sakaba-link
 ```
 ### Create managed certificate
 ```zsh
@@ -105,7 +105,7 @@ kubectl apply -f basic-ingress.yaml
 ```
 ### Get External IP of the load balancer
 ```zsh
-kubectl describe ingress basic-ingress --namespace=ramen-mania
+kubectl describe ingress basic-ingress --namespace=sakaba-link
 ```
 ### Check the status of the certificate
 ```zsh

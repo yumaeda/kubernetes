@@ -1,20 +1,4 @@
 # Deploy
-## Create Namespace
-```zsh
-kubectl apply -f namespace.yaml
-```
-## Get a list of Namespaces
-```zsh
-kubectl get namespaces
-```
-## Create LimitRange
-```zsh
-kubectl apply -f limitrange.yaml
-```
-## Get the LimitRange for the sakabas Namespace
-```zsh
-kubectl describe limitranges --namespace=sakabas
-```
 ## Build simplified manifest
 ```zsh
 kustomize build . > deploy.yaml
@@ -29,7 +13,7 @@ kubectl get pods --namespace=sakabas
 ```
 ## Create managed certificate
 ```zsh
-kubectl apply -f web-cert.yaml
+kubectl apply -f certificate.yaml
 ```
 ## Create Ingress
 ```zsh
@@ -69,7 +53,7 @@ kubectl delete -f basic-ingress.yaml
 ```
 ## Delete Google-managed certificate
 ```zsh
-kubectl delete -f web-cert.yaml
+kubectl delete -f certificate.yaml
 ```
 ## Delete Service
 ```zsh
@@ -86,12 +70,4 @@ kubectl delete -f cronjob.yaml
 ## Delete the ServiceAccount
 ```zsh
 kubectl delete -f serviceaccount.yaml
-```
-## Delete the LimitRange for the ramen-mania Namespace
-```zsh
-kubectl delete -f limitrange.yaml
-```
-## Delete the Namespace
-```zsh
-kubectl delete -f namespace.yaml
 ```

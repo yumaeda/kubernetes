@@ -60,9 +60,35 @@ kubens -c
 kubectx ${KUBECTL_CONTEXT}
 ```
 
+### Create Namespace
+```zsh
+kubectl apply -f namespace.yaml
+```
+### Get a list of Namespaces
+```zsh
+kubectl get namespaces
+```
+### Create LimitRange
+```zsh
+kubectl apply -f limitrange.yaml
+```
+### Get the LimitRange for the sakabas Namespace
+```zsh
+kubectl describe limitranges --namespace=sakabas
+```
+
 &nbsp;
 
-## Delete GKE cluster
+## Cleanup
+### Delete the LimitRange for the ramen-mania Namespace
+```zsh
+kubectl delete -f limitrange.yaml
+```
+### Delete the Namespace
+```zsh
+kubectl delete -f namespace.yaml
+```
+### Delete GKE cluster
 ```zsh
 gcloud container clusters delete ${CLUSTER_NAME}
 ```

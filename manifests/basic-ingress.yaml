@@ -5,7 +5,7 @@ metadata:
   namespace: sakabas
   annotations:
     kubernetes.io/ingress.global-static-ip-name: "website-lb-ip"
-    networking.gke.io/managed-certificates: "web-cert"
+    networking.gke.io/managed-certificates: "web-cert,api-cert"
 spec:
   rules:
     - host: "sakabas.com"
@@ -16,5 +16,15 @@ spec:
             backend:
               service:
                 name: web
+                port:
+                  number: 80
+    - host: "api.sakabas.com"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: api
                 port:
                   number: 80

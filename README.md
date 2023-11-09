@@ -76,6 +76,14 @@ kubectl apply -f limitrange.yaml
 ```zsh
 kubectl describe limitranges --namespace=sakabas
 ```
+## Create Ingress
+```zsh
+kubectl apply -f basic-ingress.yaml
+```
+## Get External IP of the load balancer
+```zsh
+kubectl describe ingress basic-ingress --namespace=sakabas
+```
 
 &nbsp;
 
@@ -83,6 +91,10 @@ kubectl describe limitranges --namespace=sakabas
 ### Delete the LimitRange for the ramen-mania Namespace
 ```zsh
 kubectl delete -f limitrange.yaml
+```
+## Delete Ingress
+```zsh
+kubectl delete -f basic-ingress.yaml
 ```
 ### Delete the Namespace
 ```zsh

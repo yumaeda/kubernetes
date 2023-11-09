@@ -15,14 +15,6 @@ kubectl get pods --namespace=sakabas
 ```zsh
 kubectl apply -f certificate.yaml
 ```
-## Create Ingress
-```zsh
-kubectl apply -f basic-ingress.yaml
-```
-## Get External IP of the load balancer
-```zsh
-kubectl describe ingress basic-ingress --namespace=sakabas
-```
 ## Check the status of the certificate
 ```zsh
 gcloud beta compute ssl-certificates list
@@ -47,10 +39,6 @@ kubectl describe cronjob terminated-pod-cleaner --namespace=ramen-mania
 &nbsp;
 
 # Delete
-## Delete Ingress
-```zsh
-kubectl delete -f basic-ingress.yaml
-```
 ## Delete Google-managed certificate
 ```zsh
 kubectl delete -f certificate.yaml

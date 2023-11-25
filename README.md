@@ -24,7 +24,7 @@ export PROJECT_ID=xxxx
 ```zsh
 export REGION=us-central1 &&
 export ZONE=us-central1-a &&
-export CLUSTER_NAME="prod-$REGION-yumaeda"
+export CLUSTER_NAME="prod-$REGION-sakabas"
 ```
 ### Execute below command
 ```zsh
@@ -35,6 +35,8 @@ gcloud container clusters create \
   --num-nodes=2 \
   --max-nodes=3 \
   --disk-size=10 \
+  --network=sakabas-vpc \
+  --subnetwork=subnet-us-central-192 \
   --zone ${ZONE} \
   --cluster-version latest \
   ${CLUSTER_NAME}
@@ -110,9 +112,9 @@ gcloud container clusters delete ${CLUSTER_NAME}
 ## Misc
 ### Reduce the number of nodes in the k8s cluster
 ```zsh
-gcloud container node-pools create ramen-mania-pool \
+gcloud container node-pools create sakabas-pool \
   --cluster ${CLUSTER_NAME} --zone ${ZONE} \
-  --machine-type=e2-small --num-nodes=2 --max-nodes=3 \
+  --machine-type=e2-micro --num-nodes=2 --max-nodes=3 \
   --disk-size=10 --preemptible
 ```
 ```zsh
@@ -151,95 +153,6 @@ kubectl rollout restart deployment/web
 ### Delete all pods
 ```zsh
 kubectl delete --all pods --all-namespaces
-```
-
-&nbsp;
-
-## Datadog
-### Set environment variable for API Key
-```zsh
-export DATADOG_API_KEY=xxxx
-```
-### Install Datadog Agent
-```zsh
-helm repo add datadog https://helm.datadoghq.com
-helm repo update
-helm install datadog-agent -f datadog-values.yaml -n ramen-mania --set datadog.site='datadoghq.com' --set datadog.apiKey=${DATADOG_API_KEY} datadog/datadog
-```
-### Warning
-```zsh
-###################################################################################
-####   WARNING: Cluster-Agent should be deployed in high availability mode     ####
-###################################################################################
-
-The Cluster-Agent should be in high availability mode because the following features
-are enabled:
-* Admission Controller
-
-To run in high availability mode, our recommendation is to update the chart
-configuration with:
-* set clusterAgent.replicas value to 2 replicas .
-* set clusterAgent.createPodDisruptionBudget to true.
-```
-### Uinstall Datadog Operator
-```zsh
-helm uninstall datadog-agent -n ramen-mania
-kubectl delete configmap datadog-agent-leader-election -n ramen-mania
-kubectl delete configmap datadog-agenttoken -n ramen-mania
-kubectl delete configmap datadog-cluster-id -n ramen-mania
-```
-
-&nbsp;
-
-## Istio
-### Preparation
-```zsh
-helm repo add istio https://istio-release.storage.googleapis.com/charts
-helm repo update
-```
-### Install
-```zsh
-kubectl create namespace istio-system
-```
-```zsh
-helm install istio-base istio/base -n istio-system
-```
-```zsh
-helm install istiod istio/istiod -n istio-system --wait
-```
-```zsh
-kubectl create namespace istio-ingress
-```
-```zsh
-kubectl label namespace istio-ingress istio-injection=enabled
-```
-```zsh
-helm install istio-ingress istio/gateway -n istio-ingress --wait
-```
-```zsh
-helm list --namespace=istio-system
-```
-```zsh
-kubectl get pods --namespace=istio-system
-```
-### Uinstall
-```zsh
-helm uninstall istio-ingress --namespace=istio-system
-```
-```zsh
-helm uninstall istiod --namespace=istio-system
-```
-```zsh
-helm uninstall istio-base --namespace=istio-system
-```
-```zsh
-kubectl delete namespace istio-system
-```
-```zsh
-kubectl delete namespace istio-ingress
-```
-```zsh
-kubectl get crd -oname | grep --color=never 'istio.io' | xargs kubectl delete
 ```
 
 &nbsp;

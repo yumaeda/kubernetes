@@ -25,7 +25,7 @@ kubectl apply -f serviceaccount.yaml
 ```
 ## Get a list of ServiceAccounts
 ```zsh
-kubectl get serviceaccounts --namespace=ramen-mania
+kubectl get serviceaccounts --namespace=default
 ```
 ## Create CronJob
 ```zsh
@@ -33,7 +33,7 @@ kubectl apply -f cronjob.yaml
 ```
 ## Check a CronJob's configuration
 ```zsh
-kubectl describe cronjob terminated-pod-cleaner --namespace=ramen-mania
+kubectl describe cronjob terminated-pod-cleaner --namespace=default
 ```
 
 &nbsp;

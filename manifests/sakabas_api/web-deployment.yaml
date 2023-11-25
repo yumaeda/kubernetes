@@ -9,7 +9,10 @@ spec:
     spec:
       containers:
       - name: api
-        image: "us-docker.pkg.dev/google-samples/containers/gke/hello-app:2.0"
+        image: "us-central1-docker.pkg.dev/hello-world-352201/sakabas-api/sakabas-api:latest"
+        imagePullPolicy: "Always"
         env:
         - name: "PORT"
-          value: "50000"
+          value: "8080"
+        - name: "APP_CONFIG_JSON"
+          value: "{}"

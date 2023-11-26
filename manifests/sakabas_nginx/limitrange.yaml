@@ -2,13 +2,13 @@ apiVersion: v1
 kind: LimitRange
 metadata:
   name: memory-limit-range
-  namespace: sakabas
+  namespace: sakabas-nginx
 spec:
   limits:
   - default:
-      memory: 15Mi
-      cpu: "0.05"
+      memory: 10Mi
+      cpu: "0.002"
     defaultRequest:
-      memory: 6Mi
-      cpu: "0.01"
+      memory: 3Mi
+      cpu: "0.0001"
     type: Container

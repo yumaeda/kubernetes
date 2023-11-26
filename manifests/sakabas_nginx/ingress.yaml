@@ -1,11 +1,11 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: basic-ingress
-  namespace: sakabas
+  name: web-ingress
+  namespace: sakabas-nginx
   annotations:
     kubernetes.io/ingress.global-static-ip-name: "website-lb-ip"
-    networking.gke.io/managed-certificates: "web-cert,api-cert"
+    networking.gke.io/managed-certificates: "web-cert"
 spec:
   rules:
     - host: "sakabas.com"
@@ -16,15 +16,5 @@ spec:
             backend:
               service:
                 name: web
-                port:
-                  number: 80
-    - host: "api.sakabas.com"
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: api
                 port:
                   number: 80

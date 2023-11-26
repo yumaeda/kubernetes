@@ -1,4 +1,20 @@
 # Deploy
+## Create Namespace
+```zsh
+kubectl apply -f namespace.yaml
+```
+## Get a list of Namespaces
+```zsh
+kubectl get namespaces
+```
+## Create LimitRange
+```zsh
+kubectl apply -f limitrange.yaml
+```
+## Get the LimitRange for the sakabas Namespace
+```zsh
+kubectl describe limitranges --namespace=sakabas-nginx
+```
 ## Build simplified manifest
 ```zsh
 kustomize build . > deploy.yaml
@@ -9,7 +25,7 @@ kubectl apply -f deploy.yaml
 ```
 ## List Pods
 ```zsh
-kubectl get pods --namespace=sakabas
+kubectl get pods --namespace=sakabas-nginx
 ```
 ## Create managed certificate
 ```zsh
@@ -19,43 +35,39 @@ kubectl apply -f certificate.yaml
 ```zsh
 gcloud beta compute ssl-certificates list
 ```
-## Create a ServiceAccount
+## Create Ingress
 ```zsh
-kubectl apply -f serviceaccount.yaml
+kubectl apply -f ingress.yaml
 ```
-## Get a list of ServiceAccounts
+## Get External IP of the load balancer
 ```zsh
-kubectl get serviceaccounts --namespace=default
-```
-## Create CronJob
-```zsh
-kubectl apply -f cronjob.yaml
-```
-## Check a CronJob's configuration
-```zsh
-kubectl describe cronjob terminated-pod-cleaner --namespace=default
+kubectl describe ingress web-ingress --namespace=sakabas-nginx
 ```
 
 &nbsp;
 
 # Delete
+## Delete Ingress
+```zsh
+kubectl delete -f ingress.yaml
+```
 ## Delete Google-managed certificate
 ```zsh
 kubectl delete -f certificate.yaml
 ```
 ## Delete Service
 ```zsh
-kubectl delete service web --namespace=sakabas
+kubectl delete service web --namespace=sakabas-nginx
 ```
 ## Delete Deployment
 ```zsh
-kubectl delete deployment web --namespace=sakabas
+kubectl delete deployment web --namespace=sakabas-nginx
 ```
-## Delete a CronJob
+## Delete LimitRange
 ```zsh
-kubectl delete -f cronjob.yaml
+kubectl delete -f limitrange.yaml
 ```
-## Delete the ServiceAccount
+## Delete the Namespace
 ```zsh
-kubectl delete -f serviceaccount.yaml
+kubectl delete -f namespace.yaml
 ```

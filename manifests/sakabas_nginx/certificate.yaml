@@ -1,7 +1,7 @@
 apiVersion: networking.gke.io/v1
 kind: ManagedCertificate
 metadata:
-  namespace: sakabas
+  namespace: sakabas-nginx
   name: web-cert
 spec:
   domains:

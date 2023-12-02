@@ -22,8 +22,8 @@ gcloud services enable container.googleapis.com
 export PROJECT_ID=xxxx
 ```
 ```zsh
-export REGION=us-central1 &&
-export ZONE=us-central1-a &&
+export REGION=asia-northeast1 &&
+export ZONE=asia-northeast1-b &&
 export CLUSTER_NAME="prod-$REGION-sakabas"
 ```
 ### Execute below command
@@ -32,11 +32,11 @@ gcloud container clusters create \
   --preemptible \
   --project=${PROJECT_ID} \
   --machine-type=e2-micro \
-  --num-nodes=2 \
-  --max-nodes=3 \
+  --num-nodes=3 \
+  --max-nodes=4 \
   --disk-size=10 \
-  --network=sakabas-vpc \
-  --subnetwork=subnet-us-central-192 \
+  --network=sakabas-tokyo-vpc \
+  --subnetwork=subnet-asia-northeast-172 \
   --zone ${ZONE} \
   --cluster-version latest \
   ${CLUSTER_NAME}

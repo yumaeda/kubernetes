@@ -14,5 +14,40 @@ spec:
         env:
         - name: "PORT"
           value: "8080"
+        - name: "DB_PWD"
+          valueFrom:
+            secretKeyRef:
+              name: db-pwd
+              key: db-pwd
+        - name: "DB_HOST"
+          valueFrom:
+            secretKeyRef:
+              name: db-host
+              key: db-host
+        - name: "DB_NAME"
+          valueFrom:
+            secretKeyRef:
+              name: db-name
+              key: db-name
+        - name: "DB_USER"
+          valueFrom:
+            secretKeyRef:
+              name: db-user
+              key: db-user
+        - name: "S3_ID"
+          valueFrom:
+            secretKeyRef:
+              name: s3-id
+              key: s3-id
+        - name: "S3_SECRET"
+          valueFrom:
+            secretKeyRef:
+              name: s3-secret
+              key: s3-secret
+        - name: "S3_REGION"
+          valueFrom:
+            secretKeyRef:
+              name: s3-region
+              key: s3-region
         - name: "APP_CONFIG_JSON"
-          value: "{}"
+          value: "{\"db.password\":\"$(DB_PWD)\",\"db.host\":\"$(DB_HOST)\",\"db.name\":\"$(DB_NAME)\",\"db.user\":\"$(DB_USER)\",\"aws.s3.id\":\"$(S3_ID)\",\"aws.s3.secret\":\"$(S3_SECRET)\",\"aws.s3.region\":\"$(S3_REGION)\"}"

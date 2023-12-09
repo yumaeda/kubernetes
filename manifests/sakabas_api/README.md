@@ -7,6 +7,24 @@ kubectl apply -f namespace.yaml
 ```zsh
 kubectl get namespaces
 ```
+## Change current Namespace
+```zsh
+kubens sakabas-api
+```
+## Create Secrets
+```zsh
+kubectl create secret generic db-pwd --from-literal=db-pwd='${PWD}'
+kubectl create secret generic db-host --from-literal=db-host='${DB_HOST}'
+kubectl create secret generic db-name --from-literal=db-name='${DB_NAME}'
+kubectl create secret generic db-user --from-literal=db-user='${DB_USER}'
+kubectl create secret generic s3-id --from-literal=s3-id='${S3_ID}'
+kubectl create secret generic s3-secret --from-literal=s3-secret='${S3_SECRET}'
+kubectl create secret generic s3-region --from-literal=s3-region='${S3_REGION}'
+```
+## Get a list of Secrets
+```zsh
+kubectl get secrets
+```
 ## Create LimitRange
 ```zsh
 kubectl apply -f limitrange.yaml

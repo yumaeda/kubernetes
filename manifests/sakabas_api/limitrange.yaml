@@ -7,8 +7,7 @@ spec:
   limits:
   - default:
       memory: 60Mi
-      cpu: "0.05"
     defaultRequest:
-      memory: 20Mi
-      cpu: "0.025"
+      memory: 60Mi
+      cpu: "0.05"
     type: Container

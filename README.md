@@ -32,8 +32,7 @@ gcloud container clusters create \
   --preemptible \
   --project=${PROJECT_ID} \
   --machine-type=e2-small \
-  --num-nodes=3 \
-  --max-nodes=4 \
+  --num-nodes=2 \
   --disk-size=10 \
   --network=sakabas-tokyo-vpc \
   --subnetwork=subnet-asia-northeast-172 \

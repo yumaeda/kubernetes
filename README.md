@@ -75,7 +75,7 @@ gcloud container clusters delete ${CLUSTER_NAME}
 ```zsh
 gcloud container node-pools create ${NEW_POOL_NAME} \
   --cluster ${CLUSTER_NAME} --zone ${ZONE} \
-  --machine-type=e2-micro --num-nodes=4 --max-nodes=5 \
+  --machine-type=e2-small --num-nodes=3 \
   --disk-size=10 --preemptible
 ```
 - Delete the old node-pool

@@ -31,7 +31,7 @@ export CLUSTER_NAME="prod-$REGION-sakabas"
 gcloud container clusters create \
   --preemptible \
   --project=${PROJECT_ID} \
-  --machine-type=e2-micro \
+  --machine-type=e2-small \
   --num-nodes=3 \
   --max-nodes=4 \
   --disk-size=10 \

@@ -20,6 +20,11 @@ kubectl create secret generic db-user --from-literal=db-user='${DB_USER}'
 kubectl create secret generic s3-id --from-literal=s3-id='${S3_ID}'
 kubectl create secret generic s3-secret --from-literal=s3-secret='${S3_SECRET}'
 kubectl create secret generic s3-region --from-literal=s3-region='${S3_REGION}'
+kubectl create secret generic tidb-pwd --from-literal=tidb-pwd='${TIDB_PWD}'
+kubectl create secret generic tidb-host --from-literal=tidb-host='${TIDB_HOST}'
+kubectl create secret generic tidb-name --from-literal=tidb-name='${TIDB_NAME}'
+kubectl create secret generic tidb-user --from-literal=tidb-user='${TIDB_USER}'
+kubectl create secret generic tidb-port --from-literal=tidb-port='${TIDB_PORT}'
 ```
 ## Get a list of Secrets
 ```zsh

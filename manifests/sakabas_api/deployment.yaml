@@ -54,11 +54,6 @@ spec:
             secretKeyRef:
               name: tidb-user
               key: tidb-user
-        - name: "TIDB_PORT"
-          valueFrom:
-            secretKeyRef:
-              name: tidb-port
-              key: tidb-port
         - name: "S3_ID"
           valueFrom:
             secretKeyRef:
@@ -74,7 +69,7 @@ spec:
             secretKeyRef:
               name: s3-region
               key: s3-region
+        - name: "TIDB_CONFIG_JSON"
+          value: "{\"db.password\":\"$(TIDB_PWD)\",\"db.host\":\"$(TIDB_HOST)\",\"db.name\":\"$(TIDB_NAME)\",\"db.user\":\"$(TIDB_USER)\",\"aws.s3.id\":\"$(S3_ID)\",\"aws.s3.secret\":\"$(S3_SECRET)\",\"aws.s3.region\":\"$(S3_REGION)\"}"
         - name: "APP_CONFIG_JSON"
           value: "{\"db.password\":\"$(DB_PWD)\",\"db.host\":\"$(DB_HOST)\",\"db.name\":\"$(DB_NAME)\",\"db.user\":\"$(DB_USER)\",\"aws.s3.id\":\"$(S3_ID)\",\"aws.s3.secret\":\"$(S3_SECRET)\",\"aws.s3.region\":\"$(S3_REGION)\"}"
-        - name: "TIDB_CONFIG_JSON"
-          value: "{\"tidb.password\":\"$(TIDB_PWD)\",\"tidb.host\":\"$(TIDB_HOST)\",\"tidb.name\":\"$(TIDB_NAME)\",\"tidb.user\":\"$(TIDB_USER)\",\"tidb.port\":\"$(TIDB_PORT)\"}"

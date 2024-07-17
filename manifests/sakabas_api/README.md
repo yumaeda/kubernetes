@@ -24,7 +24,6 @@ kubectl create secret generic tidb-pwd --from-literal=tidb-pwd='${TIDB_PWD}'
 kubectl create secret generic tidb-host --from-literal=tidb-host='${TIDB_HOST}'
 kubectl create secret generic tidb-name --from-literal=tidb-name='${TIDB_NAME}'
 kubectl create secret generic tidb-user --from-literal=tidb-user='${TIDB_USER}'
-kubectl create secret generic tidb-port --from-literal=tidb-port='${TIDB_PORT}'
 ```
 ## Get a list of Secrets
 ```zsh

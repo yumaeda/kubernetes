@@ -8,6 +8,12 @@ brew install \
   kubectl \
   kubectx
 ```
+
+### Install gke-gcloud-auth-plugin
+```zsh
+gcloud components install gke-gcloud-auth-plugin
+```
+
 ### Enable `container.googleapis.com`
 ```zsh
 gcloud services enable container.googleapis.com

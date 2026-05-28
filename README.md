@@ -6,8 +6,7 @@
 brew install \
   helm \
   kubectl \
-  kubectx \
-  kustomize
+  kubectx
 ```
 ### Enable `container.googleapis.com`
 ```zsh

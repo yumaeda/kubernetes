@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: sakabas-nextjs
+  namespace: sakabas-nextjs
+  labels:
+    app: sakabas-nextjs
+  annotations:
+    kubernetes.io/ingress.class: gce
+    kubernetes.io/forwarding-rules.prefix: sakabas-nextjs
+    networking.gke.io/managed-certificates: sakabas-nextjs-cert
+spec:
+  rules:
+     - host: sakabas.com
+      http:
+        paths:
+           - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: sakabas-nextjs
+                port:
+                  number: 80

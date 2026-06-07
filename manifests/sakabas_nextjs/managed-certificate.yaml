@@ -1,0 +1,8 @@
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: sakabas-nextjs-cert
+  namespace: sakabas-nextjs
+spec:
+  domains:
+    - sakabas.com

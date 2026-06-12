@@ -15,6 +15,7 @@ spec:
       labels:
         app: sakabas-nextjs
     spec:
+      serviceAccountName: sakabas-nextjs
       containers:
         - name: sakabas-nextjs
           image: your-registry/sakabas-nextjs:latest
@@ -28,12 +29,16 @@ spec:
               value: "production"
             - name: PORT
               value: "3000"
-            # Add your environment variables here
-            # - name: DATABASE_URL
-            #   valueFrom:
-            #     secretKeyRef:
-            #       name: sakabas-nextjs-secrets
-            #       key: DATABASE_URL
+            - name: NEXT_PUBLIC_API_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: sakabas-nextjs-config
+                  key: NEXT_PUBLIC_API_URL
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: sakabas-nextjs-secrets
+                  key: DATABASE_URL
           resources:
             requests:
               memory: "256Mi"
@@ -43,7 +48,7 @@ spec:
               cpu: "500m"
           livenessProbe:
             httpGet:
-              path: /
+              path: /api/health
               port: 3000
             initialDelaySeconds: 10
             periodSeconds: 30
@@ -51,7 +56,7 @@ spec:
             failureThreshold: 3
           readinessProbe:
             httpGet:
-              path: /
+              path: /api/health
               port: 3000
             initialDelaySeconds: 5
             periodSeconds: 10
@@ -61,8 +66,20 @@ spec:
             runAsNonRoot: true
             readOnlyRootFilesystem: true
             allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
       restartPolicy: Always
       securityContext:
         runAsNonRoot: true
         seccompProfile:
           type: RuntimeDefault
+      initContainers:
+        - name: wait-for-api
+          image: busybox:1.36
+          command: ['sh', '-c', 'until nc -z sakabas-api 80; do echo "Waiting for sakabas-api..."; sleep 2; done']
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL

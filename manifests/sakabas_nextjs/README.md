@@ -1,16 +1,16 @@
 # Sakabas Next.js Deployment
 
-Kubernetes manifests for deploying the Sakabas Next.js application.
+Kubernetes manifests for deploying the Sakabas Next.js application to GKE.
 
 ## Overview
 
-This directory contains Kubernetes manifests for deploying a Next.js application to a GKE cluster using nginx as the ingress controller.
+This directory contains Kubernetes manifests for deploying a Next.js application to a GKE cluster using GCE ingress.
 
 ## Prerequisites
 
 - Kubernetes cluster (GKE recommended)
 - kubectl configured to access the cluster
-- nginx-ingress controller installed in the cluster
+- GCE ingress controller installed in the cluster
 
 ## Namespace
 
@@ -34,8 +34,11 @@ kubectl apply -f .
 kubectl apply -f namespace.yaml
 kubectl apply -f configmap.yaml
 kubectl apply -f secrets.yaml
-kubectl apply - deployment.yaml
+kubectl apply -f limitrange.yaml
+kubectl apply -f networkpolicy.yaml
+kubectl apply -f deployment.yaml
 kubectl apply -f service.yaml
+kubectl apply -f managed-certificate.yaml
 kubectl apply -f ingress.yaml
 ```
 
@@ -47,24 +50,14 @@ Configure environment variables in the deployment:
 
 - `NODE_ENV`: Set to `production`
 - `PORT`: Application port (default: 3000)
-
-For secrets (DATABASE_URL, API keys, etc.), use the secrets.yaml file:
-
-```bash
-kubectl create secret generic sakabas-nextjs-secrets \
-  --from-literal=DATABASE_URL="postgresql://..." \
-  --from-literal=API_SECRET_KEY="..." \
-  -n sakabas-nextjs
-```
+- `NEXT_PUBLIC_API_URL`: API base URL (from ConfigMap)
+- `DATABASE_URL`: Database connection string (from Secret)
 
 ### Ingress Configuration
 
-Update the following in `ingress.yaml`:
+The application is accessible at `https://sakabas.com` and `https://www.sakabas.com`.
 
-- `your-domain.com`: Replace with your actual domain
-- `sakabas-nextjs-tls`: Update with your TLS secret name
-
-TLS is automatically configured via nginx ingress.
+TLS is automatically configured via GKE Managed Certificates.
 
 ### Resource Limits
 
@@ -72,8 +65,6 @@ Current resource allocation:
 
 - **Requests**: 256Mi memory, 250m CPU
 - **Limits**: 512Mi memory, 500m CPU
-
-Adjust these values based on your application's needs.
 
 ## Scaling
 
@@ -100,14 +91,16 @@ kubectl logs -f deployment/sakabas-nextjs -n sakabas-nextjs
 
 ### Access Application
 
-The application is accessible at `https://your-domain.com`
+The application is accessible at `https://sakabas.com`
 
 ## Security
 
 - Container runs as non-root user
 - Read-only root filesystem enabled
 - Privilege escalation disabled
+- All capabilities dropped
 - Secrets managed via Kubernetes Secrets
+- Network policies restrict traffic
 
 ## Troubleshooting
 

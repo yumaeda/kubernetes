@@ -1,0 +1,40 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: sakabas-nextjs-policy
+  namespace: sakabas-nextjs
+  labels:
+    app: sakabas-nextjs
+spec:
+  podSelector:
+    matchLabels:
+      app: sakabas-nextjs
+  policyTypes:
+     - Ingress
+     - Egress
+  ingress:
+     - from:
+         - namespaceSelector:
+             matchLabels:
+               name: ingress-nginx
+         - namespaceSelector:
+             matchLabels:
+               name: sakabas-api
+       ports:
+         - port: 3000
+           protocol: TCP
+  egress:
+     - to:
+         - namespaceSelector:
+             matchLabels:
+               name: sakabas-api
+       ports:
+         - port: 5432
+           protocol: TCP
+     - to:
+         - namespaceSelector: {}
+       ports:
+         - port: 443
+           protocol: TCP
+         - port: 53
+           protocol: UDP

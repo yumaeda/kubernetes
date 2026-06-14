@@ -1,9 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: sakabas-nextjs-config
-  namespace: sakabas-nextjs
-  labels:
-    app: sakabas-nextjs
-data:
-  NEXT_PUBLIC_API_URL: "https://api.sakabas.com"

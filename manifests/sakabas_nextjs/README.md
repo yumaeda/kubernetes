@@ -16,10 +16,6 @@ This directory contains Kubernetes manifests for deploying a Next.js application
 
 The application is deployed to the `sakabas-nextjs` namespace.
 
-```bash
-kubectl apply -f namespace.yaml
-```
-
 ## Deployment
 
 ### Apply All Resources
@@ -32,10 +28,6 @@ kubectl apply -f .
 
 ```bash
 kubectl apply -f namespace.yaml
-kubectl apply -f configmap.yaml
-kubectl apply -f secrets.yaml
-kubectl apply -f limitrange.yaml
-kubectl apply -f networkpolicy.yaml
 kubectl apply -f deployment.yaml
 kubectl apply -f service.yaml
 kubectl apply -f managed-certificate.yaml
@@ -51,7 +43,6 @@ Configure environment variables in the deployment:
 - `NODE_ENV`: Set to `production`
 - `PORT`: Application port (default: 3000)
 - `NEXT_PUBLIC_API_URL`: API base URL (from ConfigMap)
-- `DATABASE_URL`: Database connection string (from Secret)
 
 ### Ingress Configuration
 
@@ -99,8 +90,6 @@ The application is accessible at `https://sakabas.com`
 - Read-only root filesystem enabled
 - Privilege escalation disabled
 - All capabilities dropped
-- Secrets managed via Kubernetes Secrets
-- Network policies restrict traffic
 
 ## Troubleshooting
 

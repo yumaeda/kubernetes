@@ -1,20 +1,14 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: sakabas-nextjs
+  name: web-ingress
   namespace: sakabas-nextjs
   labels:
     app: sakabas-nextjs
   annotations:
-    kubernetes.io/ingress.class: gce
-    networking.gke.io/managed-certificates: sakabas-nextjs-cert
+    kubernetes.io/ingress.global-static-ip-name: "website-lb-ip"
+    networking.gke.io/managed-certificates: "web-cert"
 spec:
-  ingressClassName: gce
-  tls:
-    - hosts:
-        - sakabas.com
-        - www.sakabas.com
-      secretName: sakabas-nextjs-tls
   rules:
     - host: sakabas.com
       http:

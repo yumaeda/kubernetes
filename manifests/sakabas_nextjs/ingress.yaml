@@ -7,14 +7,19 @@ metadata:
     app: sakabas-nextjs
   annotations:
     kubernetes.io/ingress.class: gce
-    kubernetes.io/forwarding-rules.prefix: sakabas-nextjs
     networking.gke.io/managed-certificates: sakabas-nextjs-cert
 spec:
+  ingressClassName: gce
+  tls:
+    - hosts:
+        - sakabas.com
+        - www.sakabas.com
+      secretName: sakabas-nextjs-tls
   rules:
-     - host: sakabas.com
+    - host: sakabas.com
       http:
         paths:
-           - path: /
+          - path: /
             pathType: Prefix
             backend:
               service:

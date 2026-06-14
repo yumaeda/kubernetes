@@ -2,11 +2,10 @@
 
 ## Project Overview
 
-This repository contains Kubernetes manifests for deploying the Sakabas application to Google Kubernetes Engine (GKE). The application consists of three main services:
+This repository contains Kubernetes manifests for deploying the Sakabas application to Google Kubernetes Engine (GKE). The application consists of two main services:
 
 1. **sakabas-api** - Backend API service
-2. **sakabas-nginx** - Nginx proxy service (nginx-gcs-proxy)
-3. **sakabas-nextjs** - Next.js frontend application
+2. **sakabas-nextjs** - Next.js frontend application
 
 ## Environment Setup
 
@@ -29,7 +28,6 @@ gcloud container clusters get-credentials prod-asia-northeast1-sakabas \
 Each service has its own directory under `manifests/`:
 
 - `manifests/sakabas_api/` - API deployment (2 replicas)
-- `manifests/sakabas_nginx/` - Nginx proxy (1 replica)
 - `manifests/sakabas_nextjs/` - Next.js app (2 replicas)
 
 Each directory contains:
@@ -37,9 +35,9 @@ Each directory contains:
 - `deployment.yaml` - Application deployment
 - `service.yaml` - Service definition
 - `ingress.yaml` - Ingress configuration
-- `certificate.yaml` / `managed-certificate.yaml` - TLS certificates
+- `managed-certificate.yaml` - TLS certificates
 - `limitrange.yaml` - Resource limits for the namespace
-- `secrets.yaml` / `configmap.yaml` - Configuration
+- `service-account.yaml` - Service account for pod identity
 
 ## Deployment Commands
 
@@ -62,9 +60,25 @@ kubectl rollout restart deployment/<deployment-name> -n <namespace>
 
 | Service | Replicas | Memory Request | CPU Request | Memory Limit | CPU Limit |
 |---------|----------|----------------|-------------|--------------|-----------|
-| sakabas-api | 2 | 256Mi | 250m | 512Mi | 500m |
-| sakabas-nginx | 1 | 64Mi | 50m | 128Mi | 100m |
-| sakabas-nextjs | 2 | 256Mi | 250m | 512Mi | 500m |
+| sakabas-api | 2 | 100Mi (LimitRange default) | 3m (LimitRange default) | 100Mi (LimitRange default) | 3m (LimitRange default) |
+| sakabas-nextjs | 2 | 128Mi | 125m | 128Mi | 125m |
+
+## Service-Specific Guidelines
+
+### sakabas-api
+
+- **Image**: `us-central1-docker.pkg.dev/hello-world-352201/sakabas-api/sakabas-api:latest`
+- **Port**: 8080 (container) / 80 (service, NodePort)
+- **Dependencies**: TiDB, AWS S3
+- **Secrets Required**: `tidb-pwd`, `tidb-host`, `tidb-name`, `tidb-user`, `s3-id`, `s3-secret`, `s3-region`
+
+### sakabas-nextjs
+
+- **Image**: `us-central1-docker.pkg.dev/hello-world-352201/sakabas-nextjs/sakabas-nextjs:latest`
+- **Port**: 3000
+- **Environment**: NODE_ENV=production
+- **Service Account**: `sakabas-nextjs`
+- **Ingress**: GCE load balancer with managed certificate
 
 ## Security Context
 
@@ -101,4 +115,4 @@ kubectl port-forward svc/<service-name> <local-port>:<service-port> -n <namespac
 
 - [GKE Managed Certificates](https://cloud.google.com/kubernetes-engine/docs/how-to/managed-certs)
 - [Kubernetes Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/)
-- [Nginx Ingress Controller](https://kubernetes.github.io/ingress-nginx/)
+- [GCE Ingress](https://cloud.google.com/kubernetes-engine/docs/concepts/ingress)

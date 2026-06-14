@@ -1,5 +1,0 @@
-commonLabels:
-  run: web
-resources:
-- service.yaml
-- deployment.yaml

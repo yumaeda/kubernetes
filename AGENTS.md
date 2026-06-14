@@ -73,22 +73,17 @@ resources:
 ### sakabas-api
 
 - **Image**: `us-central1-docker.pkg.dev/hello-world-352201/sakabas-api/sakabas-api:latest`
-- **Port**: 8080
+- **Port**: 8080 (container) / 80 (service, NodePort)
 - **Dependencies**: TiDB, AWS S3
-- **Secrets Required**: `tidb-pwd`, `tidb-host`, `tidb-name`, `tidb-user`, `s3-id`, `s3-secret`, `s3-region`, `db-pwd`, `db-host`, `db-name`, `db-user`
-
-### sakabas-nginx
-
-- **Image**: `us-central1-docker.pkg.dev/hello-world-352201/nginx-gcs-proxy/nginx-gcs-proxy:latest`
-- **Port**: 80
-- **Purpose**: GCS proxy for serving static content
+- **Secrets Required**: `tidb-pwd`, `tidb-host`, `tidb-name`, `tidb-user`, `s3-id`, `s3-secret`, `s3-region`
 
 ### sakabas-nextjs
 
-- **Image**: `your-registry/sakabas-nextjs:latest` (needs to be configured)
+- **Image**: `us-central1-docker.pkg.dev/hello-world-352201/sakabas-nextjs/sakabas-nextjs:latest`
 - **Port**: 3000
 - **Environment**: NODE_ENV=production
-- **Health Checks**: HTTP GET on `/`
+- **Service Account**: `sakabas-nextjs`
+- **Ingress**: GCE load balancer with managed certificate
 
 ## Common Operations
 

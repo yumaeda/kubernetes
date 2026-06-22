@@ -44,6 +44,7 @@ spec:
                 drop:
                  - ALL
       restartPolicy: Always
+      terminationGracePeriodSeconds: 1
       securityContext:
         runAsNonRoot: true
         runAsUser: 1001

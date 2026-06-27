@@ -106,6 +106,10 @@ kubectl delete pod ${POD_NAME}
 ```zsh
 kubectl delete --all pods --all-namespaces
 ```
+### Delete failed pods
+```zsh
+kubectl delete pods --field-selector status.phase=Failed
+```
 
 &nbsp;
 

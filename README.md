@@ -34,10 +34,10 @@ export CLUSTER_NAME="prod-$REGION-sakabas"
 ### Execute below command
 ```zsh
 gcloud container clusters create \
-  --preemptible \
+  --spot \
   --project=${PROJECT_ID} \
-  --machine-type=e2-small \
-  --num-nodes=2 \
+  --machine-type=e2-medium \
+  --num-nodes=1 \
   --disk-size=10 \
   --network=sakabas-tokyo-vpc \
   --subnetwork=subnet-asia-northeast-172 \
@@ -79,8 +79,8 @@ gcloud container clusters delete ${CLUSTER_NAME}
 ```zsh
 gcloud container node-pools create ${NEW_POOL_NAME} \
   --cluster ${CLUSTER_NAME} --zone ${ZONE} \
-  --machine-type=e2-small --num-nodes=3 \
-  --disk-size=12 --preemptible
+  --machine-type=e2-medium --num-nodes=1 \
+  --disk-size=10 --spot
 ```
 - Delete the old node-pool
 ```zsh

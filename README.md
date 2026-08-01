@@ -38,7 +38,7 @@ gcloud container clusters create \
   --project=${PROJECT_ID} \
   --machine-type=e2-medium \
   --num-nodes=1 \
-  --disk-size=10 \
+  --disk-size=20 \
   --network=sakabas-tokyo-vpc \
   --subnetwork=subnet-asia-northeast-172 \
   --zone ${ZONE} \

@@ -1,5 +1,7 @@
-commonLabels:
-  app: api
+labels:
+  - pairs:
+      app: api
+    includeSelectors: true  # Optional: injects the label into resource selectors
 resources:
-- service.yaml
-- deployment.yaml
+  - service.yaml
+  - deployment.yaml

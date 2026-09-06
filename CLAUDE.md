@@ -60,7 +60,7 @@ kubectl rollout restart deployment/<deployment-name> -n <namespace>
 
 | Service | Replicas | Memory Request | CPU Request | Memory Limit | CPU Limit |
 |---------|----------|----------------|-------------|--------------|-----------|
-| sakabas-api | 2 | 100Mi (LimitRange default) | 3m (LimitRange default) | 100Mi (LimitRange default) | 3m (LimitRange default) |
+| sakabas-api | 2 | 15m (LimitRange default) | 15m (explicit) | 30m (explicit) | 30m (explicit) |
 | sakabas-nextjs | 2 | 128Mi | 125m | 128Mi | 125m |
 
 ## Service-Specific Guidelines

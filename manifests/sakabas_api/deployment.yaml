@@ -4,7 +4,7 @@ metadata:
   name: api
   namespace: sakabas-api
 spec:
-  replicas: 2
+  replicas: 1
   template:
     spec:
       containers:
@@ -55,8 +55,8 @@ spec:
           value: "{\"aws.s3.id\":\"$(S3_ID)\",\"aws.s3.secret\":\"$(S3_SECRET)\",\"aws.s3.region\":\"$(S3_REGION)\"}"
         resources:
           requests:
-            cpu: "0.015"
-            memory: "100Mi"
-          limits:
             cpu: "0.03"
-            memory: "100Mi"
+            memory: "200Mi"
+          limits:
+            cpu: "0.06"
+            memory: "200Mi"

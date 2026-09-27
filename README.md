@@ -43,6 +43,9 @@ gcloud container clusters create \
   --subnetwork=subnet-asia-northeast-172 \
   --zone ${ZONE} \
   --cluster-version latest \
+  --enable-autoscaling \
+  --min-nodes=0 \
+  --max-nodes=1 \
   ${CLUSTER_NAME}
 ```
 ### Get a list of GKE cluster

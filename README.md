@@ -68,7 +68,7 @@ kubectx ${KUBECTL_CONTEXT}
 
 ### Delete GKE cluster
 ```zsh
-gcloud container clusters delete ${CLUSTER_NAME}
+gcloud container clusters delete ${CLUSTER_NAME} --zone $ZONE
 ```
 
 &nbsp;

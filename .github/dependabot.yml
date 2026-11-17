@@ -1,0 +1,19 @@
+version: 2
+updates:
+  # Monitor container images in Kubernetes manifests
+  - package-ecosystem: "container"
+    directory: "/"
+    labels: ["dependencies", "container"]
+    schedule:
+      interval: "daily"
+    # Only update images using the :latest tag
+    allow:
+      - dependency-name: "*sakabas-api*"
+      - dependency-name: "*sakabas-nextjs*"
+
+  # Monitor GitHub Actions for version updates
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    labels: ["dependencies", "github-actions"]
+    schedule:
+      interval: "daily"
